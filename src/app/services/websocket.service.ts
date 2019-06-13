@@ -7,6 +7,7 @@ import { Socket } from 'ngx-socket-io';
 export class WebsocketService {
 
   public socketStatus = false;
+  public user: any;
 
   constructor(
     private socket: Socket
@@ -37,5 +38,13 @@ export class WebsocketService {
     // Escucha evento del servidor
     listen(evento: string) {
       return this.socket.fromEvent( evento );
+    }
+
+    loginWS(username){
+      console.log('Configurando', username);
+      
+      this.emit('configurar-usuario', {username}, resp=> {
+        console.log(resp);
+      })
     }
 }
